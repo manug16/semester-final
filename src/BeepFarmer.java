@@ -1,12 +1,14 @@
 import org.asl.karelx.Farmer;
-
+import edu.fcps.karel2.Display;
 /**
  * Represents a farmer capable of sowing or reaping beepers from a rectangular garden
  *
  */
 public class BeepFarmer extends Farmer {
 
-	//  TODO Add one or more constructors, as needed
+	public BeepFarmer() {
+      super(3, 5, Display.INFINITY);
+   }
 	
 	/**
 	 * Access all locations in a rectangular garden and pick up any beepers found
@@ -19,7 +21,22 @@ public class BeepFarmer extends Farmer {
 	 * Ex. reap(7, 4) should gather all beepers from an area 7 rows wide and 4 rows tall
 	 */
 	public void reap(int width, int height) {
-		// TODO You implement this
+		int x = 3;
+      int n = 0;
+      while(n != height) {
+         while(frontIsClear()) {
+            while(nextToABeeper()) {
+               pickBeeper();
+            }
+            move();
+         }
+      n++;
+      }
+      while(!frontIsClear() && nextToABeeper()) {
+         pickBeeper();
+      }
+      teleport(x+1, 5);
+      x++;
 	}
 	
 	/**
